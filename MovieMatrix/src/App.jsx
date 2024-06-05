@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios';
 import './App.css'
 
@@ -8,25 +8,27 @@ function App() {
 
   const [movieName,setMoviename] = useState('');
   const [searchResult,setSearchResult] = useState(null);
+  const [error,setError] = useState(null);
  
 
-  useEffect(()=>{
-    const fetchdata = async () =>{
-      if(movieName){
+ 
+    const fetchdata = async (movieName) =>{
         try {
           const response = await axios.get(
-            `http://www.omdbapi.com/?apikey=${apiKey}&t=${movieName}`
+            `http://www.omdbapi.com/?apikey=${apiKey}&s=${movieName}`
           );
-          console.log(response.data)
           setSearchResult(response.data);
+          console.log(searchResult)
+          setError(null)
         } catch (error) {
           console.error("Error fetching the move data " ,error)
+          setError('Error fetching the movie data');
           setSearchResult(null);
         }
-      }
-    }
-    fetchdata();
-  },[movieName])
+      };
+    
+   
+
 
   const handleInputChanges = async (e) =>{
     setMoviename(e.target.value)
@@ -34,6 +36,9 @@ function App() {
 
   const handleSearch = async (e) =>{
     e.preventDefault();
+    if(movieName){
+      fetchdata(movieName);
+    }
     
   }
 
@@ -54,13 +59,19 @@ function App() {
     </div>
 
     <div className='card flex justify-center'>
-       {searchResult && (
-         <div>
-         <h2>Search Result</h2>
-          <p>Movie Name: {searchResult.Title}</p>
-          <p>Year: {searchResult.Year}</p>
-         <img src={searchResult.Poster}/>
-         </div>
+       {searchResult && !error && (
+        <div>
+        <h2>Search Results</h2>
+          {searchResult.Search.map((item)=>{
+           return (
+            <div key={item.imdbID}  className="movie-item">
+            <p>Movie Name: {item.Title} </p>
+            <p>Year: {item.Year} </p>
+            <img src={item.Poster}  />
+            </div>
+           )
+          })}
+        </div>
        )}
     </div>
     
@@ -70,3 +81,11 @@ function App() {
 }
 
 export default App
+{/* <h2>Search Results</h2>
+            {searchResult.Search.map((item) => (
+              <div key={item.imdbID} className="movie-item">
+                <p>Movie Name: {item.Title}</p>
+                <p>Year: {item.Year}</p>
+                <img src={item.Poster} alt={`${item.Title} poster`} />
+              </div>
+            ))} */}

@@ -1,7 +1,10 @@
 
-  function TruncateText ({text}){
+  function TruncateText ({text,wordLimit}){
      const words = text.split(" ");
-     console.log(words[0])
+    if(words.length>wordLimit){
+      return words.slice(0,wordLimit).join(" ") + "...";
+    }
+    return text;
   }
 
 export function CardComponent({item}){
@@ -18,9 +21,10 @@ export function CardComponent({item}){
                   </div>
                   <div>
                   <span class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                  <TruncateText text={item.overview}/>
+                  <TruncateText text={item.overview} wordLimit={150}/>
                   </span>
                   </div>
+                  <a  class="italic text-sm text-amber-600 hover:underline"> Read More...</a>
                  
                   
                   

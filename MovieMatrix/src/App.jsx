@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios';
 import './App.css'
+import {MovieCard} from "./components/movieCard"
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     const fetchdata = async (movieName) =>{
         try {
           const response = await axios.get(
-            `http://www.omdbapi.com/?apikey=${apiKey}&s=${movieName}`
+            `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${movieName}`
           );
           setSearchResult(response.data);
           console.log(searchResult)
@@ -44,7 +45,7 @@ function App() {
 
   return (
     <>
-    <div className='flex justify-center py-10'>
+    <div className='flex justify-center py-10 bg-gradient-to-br from-purple-500 to-pink-500'>   
       <form onSubmit={handleSearch}>
       <input
        value={movieName}
@@ -58,34 +59,10 @@ function App() {
       </form>
     </div>
 
-    <div className='card flex justify-center'>
-       {searchResult && !error && (
-        <div>
-        <h2>Search Results</h2>
-          {searchResult.Search.map((item)=>{
-           return (
-            <div key={item.imdbID}  className="movie-item">
-            <p>Movie Name: {item.Title} </p>
-            <p>Year: {item.Year} </p>
-            <img src={item.Poster}  />
-            </div>
-           )
-          })}
-        </div>
-       )}
-    </div>
-    
-     
+   
+    <MovieCard searchResult={searchResult} error={error}></MovieCard>
     </>
   )
 }
 
 export default App
-{/* <h2>Search Results</h2>
-            {searchResult.Search.map((item) => (
-              <div key={item.imdbID} className="movie-item">
-                <p>Movie Name: {item.Title}</p>
-                <p>Year: {item.Year}</p>
-                <img src={item.Poster} alt={`${item.Title} poster`} />
-              </div>
-            ))} */}

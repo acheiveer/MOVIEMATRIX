@@ -2,6 +2,7 @@ import { useState } from 'react'
 import '../App.css'
 import axios from 'axios';
 import { SearchBar } from './SearchBar';
+import { Card } from './CardComponent';
 
 
 
@@ -71,6 +72,9 @@ export function Main(){
 
     <div className="flex-[0.9] mx-auto mt-15 w-4/5">
       <SearchBar handleSearch={handleSearch} handleSearchValue={handleSearchValue} movieName={movieName} page={nextPage} activeTab={activeTab}/>
+
+
+      <Card cardData={cardData} searchFor={searchFor}/>
     </div>
 
 

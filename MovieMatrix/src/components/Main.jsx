@@ -1,68 +1,84 @@
 import { useState } from 'react'
-import axios from 'axios';
-
 import '../App.css'
-import {MovieCard} from "./movieCard"
+import axios from 'axios';
+import { SearchBar } from './SearchBar';
+
 
 
 
 export function Main(){
     const apiKey = import.meta.env.VITE_API_KEY;
 
-    const [movieName,setMoviename] = useState('');
-    const [searchResult,setSearchResult] = useState(null);
-    const [error,setError] = useState(null);
-   
-  
-   
-      const fetchdata = async (movieName) =>{
-          try {
+    const [activeTab, setActiveTab] = useState('movie');
+    const [movieName,setMoviename] = useState("");
+    const [cardData,setCardData] = useState([]);
+    const [nextPage,setNextPage] = useState(1);
+    const [searchFor,setSearchfor] =  useState("movie")
+
+    const fetchdata = async (finalSearchKeyword,page) => {
+        try {
             const response = await axios.get(
-              `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${movieName}`
-            );
-            setSearchResult(response.data);
-            console.log(searchResult)
-            setError(null)
-          } catch (error) {
+            `https://api.themoviedb.org/3/search/${searchFor}?api_key=${apiKey}&language=en-US&query=${finalSearchKeyword}&page=${page}&include_adult=false`
+            )
+            console.log(response.data)
+            setCardData(response.data.results);
+            if(page>=response.data.total_pages) page=0;
+            setNextPage(page+1)
+        } catch (error) {
             console.error("Error fetching the move data " ,error)
-            setError('Error fetching the movie data');
-            setSearchResult(null);
-          }
-        };
+        }
       
-     
+    }
+
+    function handleSearchTabs(keyword){
+        setActiveTab(keyword);
+        setSearchfor(keyword);
+    };
+   
   
-  
-    const handleInputChanges = async (e) =>{
+   
+      
+    const handleSearchValue = async (e) =>{
       setMoviename(e.target.value)
     }
   
-    const handleSearch = async (e) =>{
-      e.preventDefault();
+    const handleSearch = async (page) =>{
       if(movieName){
-        fetchdata(movieName);
+        const finalSearchKeyword = movieName.split(/[ -,]/).join("+");
+        fetchdata(finalSearchKeyword,page);
       }
-      
+      else{
+        alert("Please enter any movie name in the search box");
+      }
+
+
     }
   
     return (
-      <>
-      <div className='flex justify-center py-10 bg-gradient-to-br from-purple-500 to-pink-500'>   
-        <form onSubmit={handleSearch}>
-        <input
-         value={movieName}
-         onChange={handleInputChanges}
-         placeholder='Search for movies'
-         className='border-solid border-2 border-indigo-600 py-2 px-4 rounded'/>
-  
-      <button
-       type="submit"
-       className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Search</button>
-        </form>
+     <div className='font-poppins absolute w-[70vw] min-h-[80vh] min-w-[250px] bg-[#ffffff] z-5 top-[80px] mx-[14%] rounded-[10px] shadow-custom p-0 flex flex-col justify-between items-center overflow-hidden'>   
+
+
+    <div className='flex-[0.1] w-4/5 flex justify-around items-center mt-5'>
+      <div
+        className={`text-xl px-4 py-2 font-semibold text-[#cf7035] ${activeTab === 'movie' ? 'active border-b-2 border-[#cf7035]' : 'hover:bg-[#e16844] hover:text-white hover:cursor-pointer'}`}
+        onClick={() => handleSearchTabs('movie')}>Movies
       </div>
-  
+      <div
+        className={`text-xl px-4 py-2 font-semibold text-[#3ada9a] ${activeTab === 'tv' ? 'active border-b-2 border-[#3ada9a]' : 'hover:bg-[#38bb79] hover:text-white hover:cursor-pointer'}`}
+        onClick={() => handleSearchTabs('tv')}>TV Shows
+      </div>
+    </div>
+
+    <div className="flex-[0.9] mx-auto mt-15 w-4/5">
+      <SearchBar handleSearch={handleSearch} handleSearchValue={handleSearchValue} movieName={movieName} page={nextPage} activeTab={activeTab}/>
+    </div>
+
+
+
+
+
+      </div>
+      
      
-      <MovieCard searchResult={searchResult} error={error}></MovieCard>
-      </>
     )
 }

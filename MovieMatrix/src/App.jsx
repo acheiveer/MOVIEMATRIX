@@ -1,6 +1,7 @@
-
 import './App.css'
-import { Main } from './components/Main'
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+
+import { HomeView } from './components/HomeView'
 
 
 
@@ -9,7 +10,12 @@ function App() {
  
   return (
     <>
-     <Main/>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' exact element={<HomeView/>}></Route>
+    </Routes>
+    </BrowserRouter>
+     
     </>
   )
 }

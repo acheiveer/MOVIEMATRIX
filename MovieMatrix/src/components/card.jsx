@@ -24,7 +24,7 @@ export function CardComponent({item}){
                   <TruncateText text={item.overview} wordLimit={150}/>
                   </span>
                   </div>
-                  <a  class="italic text-sm text-amber-600 hover:underline"> Read More...</a>
+                  <a  class="italic text-sm text-amber-600 "> Read More...</a>
                  
                   
                   

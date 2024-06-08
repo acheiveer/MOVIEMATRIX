@@ -13,8 +13,11 @@ export default {
       },
       boxShadow: {
         'custom': '12px 19px 62px -34px rgba(49, 29, 63, 0.18)',
+        
       },
+      
     },
   },
+  
   plugins: [],
 }

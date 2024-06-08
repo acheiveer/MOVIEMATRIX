@@ -22,10 +22,10 @@ export function SearchBar({handleSearch,handleSearchValue,movieName,page,activeT
     }
 
     return(
-        <div class="w-full flex items-center justify-center">
-  <form onSubmit={handleSubmit} class="flex items-center justify-center w-full max-w-md  bg-[#e3a036] rounded-lg shadow-lg p-4">
+        <div className="w-full flex items-center justify-center">
+  <form onSubmit={handleSubmit} className="flex items-center justify-center w-full max-w-md  bg-[#e3a036] rounded-lg shadow-lg p-4">
     <input 
-      class="flex-1 h-12 text-lg px-4 rounded-l-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      className="flex-1 h-12 text-lg px-4 rounded-l-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
       placeholder="Enter movie name or keyword"
       value={movieName}
       onChange={handleSearchValue}
@@ -34,7 +34,7 @@ export function SearchBar({handleSearch,handleSearchValue,movieName,page,activeT
 
     <button
     type="submit"
-      class={inputBackground}
+      className={inputBackground}
     >
       Search
     </button>

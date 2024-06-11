@@ -12,8 +12,9 @@ export function Profile({profileDetails,type}){
         episodes : profileDetails?.episode_count,
         popularity : profileDetails?.popularity,
       }
+      console.log(displayDetails);
     return(
-        <div className='h-45vh w-40vw max-h-280px min-w-150px max-w-250px m-5 md:m-20 bg-opacity-5 shadow-lg rounded-lg overflow-hidden relative bg-cover bg-no-repeat'
+        <div className='h-64 w-40vw max-h-280 min-w-150 max-w-250 mx-5 my-20 bg-opacity-5 shadow-lg backdrop-blur-md border border-transparent text-black overflow-hidden relative bg-cover bg-no-repeat rounded-10'
         style={backgroundURL && {backgroundImage : `url("https://image.tmdb.org/t/p/original/${backgroundURL}")` }} onTouchStart={()=>{setDisplayDetails(true)}} onTouchEnd={()=>{setDisplayDetails(false)}} onMouseEnter={()=>{setDisplayDetails(true)}} onMouseLeave={()=>{setDisplayDetails(false)}}>
          {displayDetails ? 
          <div className='w-full h-full bg-opacity-60 bg-white text-black flex flex-col justify-center items-center p-1'>
@@ -28,7 +29,7 @@ export function Profile({profileDetails,type}){
               {profile.averageVote && <div><strong>Average Vote :</strong>{` ${profile.averageVote}`}</div>}
          </div>
 
-         : <div className=''>{title}</div>
+         : <div className='absolute bottom-0 p-1 w-full bg-[#e3a036] text-center font-semibold'>{title}</div>
          }
         </div>
     )

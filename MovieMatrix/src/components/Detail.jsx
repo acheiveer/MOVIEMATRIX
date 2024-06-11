@@ -34,8 +34,8 @@ export function DetailView() {
             <div className="w-full min-h-screen-3/2 m-0 text-white"
                 style={backgroundURL && { background: `url("https://image.tmdb.org/t/p/original${backgroundURL}")`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundAttachment: "fixed" }}>
                 <div className="h-8 w-full my-15 mx-50 p-10 sm:p-20 bg-[#e3a036] bg-opacity-40 shadow-lg rounded-lg text-center text-shadow">
-                    <h1 className="w-full mx-auto">{details.title ? details.title : details.name}</h1>
-                    <h4>{details?.tagline}</h4>
+                    <h1 className="text-3xl md:text-4xl font-bold mb-2">{details.title ? details.title : details.name}</h1>
+                    <h4 className="text-lg mb-4">{details?.tagline}</h4>
                 </div>
 
                 <div className="rounded-lg shadow-md text-lg md:text-xl mx-8 my-4 md:my-6">

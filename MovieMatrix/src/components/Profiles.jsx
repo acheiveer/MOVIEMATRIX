@@ -36,9 +36,7 @@ export function Profiles({ profilesDetails, type }) {
             <Swiper {...slideConfig}>
                 {profilesDetails?.map((profileData, index) => (
                     <SwiperSlide key={index}>
-                    
                             <Profile profileDetails={profileData} type={type} />
-                   
                     </SwiperSlide>
                 ))}
             </Swiper>

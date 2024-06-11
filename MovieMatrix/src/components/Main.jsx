@@ -3,6 +3,7 @@ import '../App.css'
 import axios from 'axios';
 import { SearchBar } from './SearchBar';
 import { Card } from './CardComponent';
+import { SortingOptions } from './SortingOptions';
 
 
 
@@ -35,9 +36,6 @@ export function Main() {
     setSearchfor(keyword);
   };
 
-
-
-
   const handleSearchValue = async (e) => {
     setMoviename(e.target.value)
   }
@@ -50,9 +48,9 @@ export function Main() {
     else {
       alert("Please enter any movie name in the search box");
     }
-
-
   }
+
+  const 
 
   return (
     <div className='font-poppins absolute w-[70vw] min-h-[80vh] min-w-[250px] bg-[#ffffff] z-5 top-[80px] mx-[14%] rounded-[10px] shadow-custom p-0 flex flex-col justify-between items-center overflow-hidden'>
@@ -73,8 +71,14 @@ export function Main() {
         <SearchBar handleSearch={handleSearch} handleSearchValue={handleSearchValue} movieName={movieName} page={nextPage} activeTab={activeTab} />
 
 
-        <Card cardData={cardData} searchFor={searchFor} />
+        {cardData.length > 0 && (
+          <div >
+          <div><p>Sort by</p></div>
+          <SortingOptions/>
+          </div>
+        )}
 
+        <Card cardData={cardData} searchFor={searchFor} />
         {cardData.length > 0 && (
           <div
             className="w-40 md:w-1/2 mx-auto my-10 md:my-25 text-center text-lg text-white bg-orange-500 p-2 md:p-5 font-semibold rounded-lg cursor-pointer"

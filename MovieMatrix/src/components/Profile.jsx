@@ -14,7 +14,7 @@ export function Profile({profileDetails,type}){
       }
       console.log(displayDetails);
     return(
-        <div className='h-64 w-40vw max-h-280 min-w-150 max-w-250 mx-5 my-20 bg-opacity-5 shadow-lg backdrop-blur-md border border-transparent text-black overflow-hidden relative bg-cover bg-no-repeat rounded-10'
+        <div className='h-72 w-40vw max-h-280 min-w-150 max-w-250 mx-5 my-20 bg-opacity-5 shadow-lg backdrop-blur-md border border-transparent text-black overflow-hidden relative bg-cover bg-no-repeat rounded-10'
         style={backgroundURL && {backgroundImage : `url("https://image.tmdb.org/t/p/original/${backgroundURL}")` }} onTouchStart={()=>{setDisplayDetails(true)}} onTouchEnd={()=>{setDisplayDetails(false)}} onMouseEnter={()=>{setDisplayDetails(true)}} onMouseLeave={()=>{setDisplayDetails(false)}}>
          {displayDetails ? 
          <div className='w-full h-full bg-opacity-60 bg-white text-black flex flex-col justify-center items-center p-1'>

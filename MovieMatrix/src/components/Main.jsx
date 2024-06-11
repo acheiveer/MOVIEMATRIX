@@ -21,12 +21,11 @@ export function Main() {
       const response = await axios.get(
         `https://api.themoviedb.org/3/search/${searchFor}?api_key=${apiKey}&language=en-US&query=${finalSearchKeyword}&page=${page}&include_adult=false`
       )
-      console.log(response.data)
       setCardData(response.data.results);
       if (page >= response.data.total_pages) page = 0;
       setNextPage(page + 1)
     } catch (error) {
-      console.error("Error fetching the move data ", error)
+      console.error("Error fetching the movie data ", error)
     }
 
   }

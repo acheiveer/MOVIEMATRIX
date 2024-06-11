@@ -12,7 +12,7 @@ export function SearchBar({handleSearch,handleSearchValue,movieName,page,activeT
             setInputBackground("h-12 px-6 text-lg text-white bg-[#cf7035] hover:bg-[#e16844] hover:text-white hover:cursor-pointer rounded-r-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50");
         }
     }, [activeTab]);
-    console.log("render")
+
 
 
 

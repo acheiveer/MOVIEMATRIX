@@ -3,7 +3,6 @@ import { RatingBar } from "./RatingBar";
 
 export function SingleCard({ value, searchFor }) {
     const navigate = useNavigate();
-    console.log(value, searchFor)
     const card = {
         title: value.title ? value.title : value.name,
         poster: value.poster_path ? `https://image.tmdb.org/t/p/original/${value.poster_path}` : "https://t4.ftcdn.net/jpg/06/99/77/83/240_F_699778378_hxlu1YGW6iv7luPpLf5v3E8Lbi6WMtnz.jpg",

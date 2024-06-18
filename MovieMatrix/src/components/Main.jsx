@@ -50,7 +50,36 @@ export function Main() {
     }
   }
 
-  const 
+  function sortResults(option,order=i){
+    if(cardData){
+      if(option==="rating"){
+        sortRating(order);
+      }
+      else if(option==="date"){
+        sortDate(order);
+      }
+      else if(option==="alphabet"){
+        sortAlphabetically(order);
+      }
+    }
+    else{
+      return;
+    }
+  }
+
+  function sortRating(order){
+    
+  }
+
+  function sortDate(order){
+
+  }
+
+  function sortAlphabetically(order){
+
+  }
+
+
 
   return (
     <div className='font-poppins absolute w-[70vw] min-h-[80vh] min-w-[250px] bg-[#ffffff] z-5 top-[80px] mx-[14%] rounded-[10px] shadow-custom p-0 flex flex-col justify-between items-center overflow-hidden'>
@@ -74,7 +103,7 @@ export function Main() {
         {cardData.length > 0 && (
           <div >
           <div><p>Sort by</p></div>
-          <SortingOptions/>
+          <SortingOptions sortResults={sortResults} searchFor={searchFor}/>
           </div>
         )}
 

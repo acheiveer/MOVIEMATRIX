@@ -124,8 +124,8 @@ export function Main() {
 
 
         {cardData.length > 0 && (
-          <div >
-          <div><p>Sort by</p></div>
+          <div className='flex w-[50%] h-[7vh] m-[5px] mx-auto justify-center' >
+          <div className='flex-[0.2] text-[#cf7035] font-semibold text-center hover:cursor-auto hover:bg-white hover:text-[#cf7035]'><p>Sort by</p></div>
           <SortingOptions sortResults={sortResults} searchFor={searchFor}/>
           </div>
         )}

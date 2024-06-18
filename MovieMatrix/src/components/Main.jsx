@@ -4,6 +4,7 @@ import axios from 'axios';
 import { SearchBar } from './SearchBar';
 import { Card } from './CardComponent';
 import { SortingOptions } from './SortingOptions';
+import Sort from './Sorting';
 
 
 
@@ -50,6 +51,24 @@ export function Main() {
     }
   }
 
+  function addDates(){
+    if(cardData &&(!cardData[0].date)){
+        for(let i=0;i<cardData.length;i++){
+            let dateVal;
+            if(cardData[i].release_date){
+                dateVal = cardData[i].release_date.split("-").join(",");
+            }
+            else if(cardData[i].first_air_date){
+                dateVal = cardData[i].first_air_date.split("-").join(",");
+            }
+            cardData[i].date = new Date(dateVal);
+        }
+    }
+    else {
+        return;
+    }
+}
+
   function sortResults(option,order=i){
     if(cardData){
       if(option==="rating"){
@@ -68,15 +87,19 @@ export function Main() {
   }
 
   function sortRating(order){
-    
+    setCardData(Sort.mergeSort(cardData,"vote_average",order));
   }
 
   function sortDate(order){
-
+    addDates();
+    setCardData(Sort.mergeSort(cardData,"date",order));
   }
 
   function sortAlphabetically(order){
-
+    if(cardData[0].title)
+      setCardData(Sort.mergeSort(cardData,"title",order))
+      else
+      setCardData(Sort.mergeSort(cardData,"name",order))
   }
 
 

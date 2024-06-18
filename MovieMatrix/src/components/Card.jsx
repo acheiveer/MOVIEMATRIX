@@ -6,7 +6,7 @@ export function SingleCard({ value, searchFor }) {
     const card = {
         title: value.title ? value.title : value.name,
         poster: value.poster_path ? `https://image.tmdb.org/t/p/original/${value.poster_path}` : "https://t4.ftcdn.net/jpg/06/99/77/83/240_F_699778378_hxlu1YGW6iv7luPpLf5v3E8Lbi6WMtnz.jpg",
-        release: "Release Date :",
+        release: "Release Date : ",
         releasedOn: value.release_date ? value.release_date : value.first_air_date,
         averageVote: value.vote_average,
         rating: value.vote_average,
